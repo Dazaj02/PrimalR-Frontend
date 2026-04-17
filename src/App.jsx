@@ -54,7 +54,7 @@ function App() {
     <div style={{ maxWidth: '800px', margin: '0 auto', fontFamily: 'Arial, sans-serif', padding: '20px' }}>
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #eee', paddingBottom: '16px' }}>
             <h1 style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-                AI Model Hub
+                PrimalR
                 <PlanBadge plan={plan} />
             </h1>
         </header>
