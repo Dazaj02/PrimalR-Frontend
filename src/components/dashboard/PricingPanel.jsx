@@ -13,17 +13,21 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
             <div style={{ display: 'flex', gap: '16px' }}>
                 {plans.map(p => {
                     const isActive = currentPlan === p.name;
+                    let planColor = p.name === 'FREE' ? '#5cb85c' // Green
+                                  : p.name === 'PRO' ? '#007bff' // Blue
+                                  : '#f39c12'; // Orange/Gold for ENTERPRISE
+                    
                     return (
                         <div key={p.name} style={{
                             flex: 1,
-                            border: isActive ? '2px solid #007bff' : '1px solid #ccc',
+                            border: isActive ? `2px solid ${planColor}` : `1px solid ${planColor}60`,
                             padding: '16px',
                             borderRadius: '8px',
                             textAlign: 'center',
-                            backgroundColor: isActive ? '#f8f9fa' : 'white',
+                            backgroundColor: isActive ? `${planColor}12` : 'white',
                             transition: 'all 0.2s ease-in-out'
                         }}>
-                            <h4 style={{ margin: '0 0 8px 0', color: isActive ? '#007bff' : 'inherit' }}>{p.name}</h4>
+                            <h4 style={{ margin: '0 0 8px 0', color: planColor }}>{p.name}</h4>
                             <p style={{ margin: '4px 0', color: '#555' }}><strong>{p.tokens}</strong> tokens / month</p>
                             <p style={{ margin: '4px 0', color: '#555' }}><strong>{p.rpm}</strong> req / min max</p>
                             {p.name === 'FREE' ? (
@@ -34,12 +38,12 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
                                         marginTop: '12px',
                                         padding: '8px 16px',
                                         width: '100%',
-                                        backgroundColor: isActive ? '#6c757d' : '#e9ecef',
-                                        color: isActive ? 'white' : '#555',
-                                        border: isActive ? 'none' : '1px solid #ccc',
+                                        backgroundColor: isActive ? '#6c757d' : planColor,
+                                        color: 'white',
+                                        border: 'none',
                                         borderRadius: '4px',
                                         cursor: isActive ? 'default' : 'pointer',
-                                        opacity: isUpgrading ? 0.7 : 1
+                                        opacity: isUpgrading && !isActive ? 0.7 : 1
                                     }}
                                 >
                                     {isActive ? 'Current Plan' : 'Downgrade to FREE'}
@@ -52,12 +56,12 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
                                         marginTop: '12px',
                                         padding: '8px 16px',
                                         width: '100%',
-                                        backgroundColor: isActive ? '#6c757d' : '#28a745',
+                                        backgroundColor: isActive ? '#6c757d' : planColor,
                                         color: 'white',
                                         border: 'none',
                                         borderRadius: '4px',
                                         cursor: isActive ? 'default' : 'pointer',
-                                        opacity: isUpgrading ? 0.7 : 1
+                                        opacity: isUpgrading && !isActive ? 0.7 : 1
                                     }}
                                 >
                                     {isActive ? 'Current Plan' : (

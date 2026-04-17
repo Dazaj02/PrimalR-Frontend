@@ -1,9 +1,9 @@
 import React from 'react';
 
 const PlanBadge = ({ plan }) => {
-    let bgColor = '#6c757d'; // Gray for FREE
+    let bgColor = '#5cb85c'; // Green for FREE
     if (plan === 'PRO') bgColor = '#007bff'; // Blue for PRO
-    if (plan === 'ENTERPRISE') bgColor = '#ffc107'; // Gold
+    if (plan === 'ENTERPRISE') bgColor = '#f39c12'; // Orange/Gold for ENTERPRISE
 
     return (
         <span style={{
