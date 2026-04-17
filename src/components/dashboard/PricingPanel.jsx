@@ -26,23 +26,41 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
                             <h4 style={{ margin: '0 0 8px 0', color: isActive ? '#007bff' : 'inherit' }}>{p.name}</h4>
                             <p style={{ margin: '4px 0', color: '#555' }}><strong>{p.tokens}</strong> tokens / month</p>
                             <p style={{ margin: '4px 0', color: '#555' }}><strong>{p.rpm}</strong> req / min max</p>
-                            <button
-                                disabled={isActive || isUpgrading}
-                                onClick={() => onUpgrade(p.name)}
-                                style={{
-                                    marginTop: '12px',
-                                    padding: '8px 16px',
-                                    width: '100%',
-                                    backgroundColor: isActive ? '#6c757d' : '#28a745',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: isActive ? 'default' : 'pointer',
-                                    opacity: isUpgrading ? 0.7 : 1
-                                }}
-                            >
-                                {isActive ? 'Current Plan' : `Upgrade to ${p.name}`}
-                            </button>
+                            {p.name === 'FREE' ? (
+                                <button
+                                    disabled={true}
+                                    style={{
+                                        marginTop: '12px',
+                                        padding: '8px 16px',
+                                        width: '100%',
+                                        backgroundColor: isActive ? '#6c757d' : '#e9ecef',
+                                        color: isActive ? 'white' : '#6c757d',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: 'default'
+                                    }}
+                                >
+                                    {isActive ? 'Current Plan' : 'Default Plan'}
+                                </button>
+                            ) : (
+                                <button
+                                    disabled={isActive || isUpgrading}
+                                    onClick={() => onUpgrade(p.name)}
+                                    style={{
+                                        marginTop: '12px',
+                                        padding: '8px 16px',
+                                        width: '100%',
+                                        backgroundColor: isActive ? '#6c757d' : '#28a745',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: isActive ? 'default' : 'pointer',
+                                        opacity: isUpgrading ? 0.7 : 1
+                                    }}
+                                >
+                                    {isActive ? 'Current Plan' : `Upgrade to ${p.name}`}
+                                </button>
+                            )}
                         </div>
                     );
                 })}
