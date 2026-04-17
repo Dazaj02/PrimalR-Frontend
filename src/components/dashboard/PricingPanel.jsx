@@ -28,19 +28,21 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
                             <p style={{ margin: '4px 0', color: '#555' }}><strong>{p.rpm}</strong> req / min max</p>
                             {p.name === 'FREE' ? (
                                 <button
-                                    disabled={true}
+                                    disabled={isActive || isUpgrading}
+                                    onClick={() => onUpgrade(p.name)}
                                     style={{
                                         marginTop: '12px',
                                         padding: '8px 16px',
                                         width: '100%',
                                         backgroundColor: isActive ? '#6c757d' : '#e9ecef',
-                                        color: isActive ? 'white' : '#6c757d',
-                                        border: 'none',
+                                        color: isActive ? 'white' : '#555',
+                                        border: isActive ? 'none' : '1px solid #ccc',
                                         borderRadius: '4px',
-                                        cursor: 'default'
+                                        cursor: isActive ? 'default' : 'pointer',
+                                        opacity: isUpgrading ? 0.7 : 1
                                     }}
                                 >
-                                    {isActive ? 'Current Plan' : 'Default Plan'}
+                                    {isActive ? 'Current Plan' : 'Downgrade to FREE'}
                                 </button>
                             ) : (
                                 <button
@@ -58,7 +60,11 @@ const PricingPanel = ({ currentPlan, onUpgrade, isUpgrading }) => {
                                         opacity: isUpgrading ? 0.7 : 1
                                     }}
                                 >
-                                    {isActive ? 'Current Plan' : `Upgrade to ${p.name}`}
+                                    {isActive ? 'Current Plan' : (
+                                        ['PRO', 'ENTERPRISE'].indexOf(p.name) < ['FREE', 'PRO', 'ENTERPRISE'].indexOf(currentPlan) 
+                                            ? `Downgrade to ${p.name}` 
+                                            : `Upgrade to ${p.name}`
+                                    )}
                                 </button>
                             )}
                         </div>

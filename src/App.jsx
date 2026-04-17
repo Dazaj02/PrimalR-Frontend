@@ -46,8 +46,17 @@ function App() {
   };
 
   const handleInitiateUpgrade = (planName) => {
-      setUpgradeTarget(planName);
-      setIsModalOpenLocal(true);
+      const plans = ['FREE', 'PRO', 'ENTERPRISE'];
+      const currentIndex = plans.indexOf(plan);
+      const targetIndex = plans.indexOf(planName);
+
+      if (targetIndex < currentIndex) {
+          // If downgrading, just call it directly (no payment simulator needed)
+          handleUpgrade(planName);
+      } else {
+          setUpgradeTarget(planName);
+          setIsModalOpenLocal(true);
+      }
   };
 
   return (
